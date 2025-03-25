@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Foundation\Inspiring;
 use App\Services\PermissionRegistry;
+use App\Services\RoleRegistry;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -68,6 +69,7 @@ class HandleInertiaRequests extends Middleware
                 }
                 return null;
             },
+
             'abilities' => $this->getAbilities($request),
 
             'flash' => function () use ($request) {

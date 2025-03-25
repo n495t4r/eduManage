@@ -3,6 +3,7 @@
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\HandlePermissions;
+use App\Http\Middleware\HandleRoles;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -30,12 +31,19 @@ return Application::configure(basePath: dirname(__DIR__))
         // ✅ Register middleware alias here
         $middleware->alias([
             'permissions' => HandlePermissions::class, // Now usable in routes
+            'roles' => HandleRoles::class, // Now usable in routes
         ]);
     })
 
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->respond(function (Response $response) {
             if ($response->getStatusCode() === 403) {
+                if (request()->user()->hasRole('teacher')) {
+                    return redirect()->route('teacher_dashboard');
+                }
+                if (request()->user()->hasRole('parent')) {
+                    return redirect()->route('parent_dashboard');
+                }
                 return Inertia::render('errors/forbidden');
             }
 

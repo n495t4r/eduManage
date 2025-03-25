@@ -13,16 +13,17 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         url: '/dashboard',
         icon: LayoutDashboard,
+        role: ['admin', 'super-admin'],
     },
-
     {
-
-        title: 'Parent Dashboard', url: '/parent_dashboard', icon: LayoutDashboard,
+        title: 'Parent Dashboard', url: '/parent_dashboard', icon: LayoutDashboard, role: ['parent'],
     },
-    { title: 'Teacher Dashboard', url: '/teacher_dashboard', icon: LayoutDashboard, },
+    { title: 'Teacher Dashboard', url: '/teacher_dashboard', icon: LayoutDashboard, role: ['teacher'] },
+    { title: 'Student Dashboard', url: '/student_dashboard', icon: LayoutDashboard, role: ['student'] },
 
     { title: 'Users', url: '/users', icon: Users2,
         ability: {subject: 'user', action: 'viewAny'}
+
     },
     { title: 'Roles', url: '/roles', icon: Shield, permission: 'view roles' },
     { title: 'Courses', url: '/courses', icon: BookOpen,},

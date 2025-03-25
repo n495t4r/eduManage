@@ -20,9 +20,9 @@ class HandlePermissions
             return $request->user()->hasPermissionTo($permission);
         });
 
-        // if (!$hasPermission) {
-        //     abort(Response::HTTP_FORBIDDEN);
-        // }
+        if (!$hasPermission) {
+            abort(Response::HTTP_FORBIDDEN);
+        }
 
         return $next($request);
     }

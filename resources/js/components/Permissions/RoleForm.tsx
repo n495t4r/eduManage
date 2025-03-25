@@ -17,7 +17,7 @@ export default function RoleForm({ role, onCancel }: RoleFormProps) {
   const { availablePermissions } = usePermissions();
   const { data, setData, post, put, processing, errors } = useForm({
     name: role?.name || '',
-    permissions: role?.permissions || [],
+    permissions: role?.permissions.map(p => typeof p === 'string' ? p : p.name) || [],
 
   });
 
